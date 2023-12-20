@@ -10,11 +10,11 @@ In practice, two different control tasks are performed. First, both the starting
 In order to facilitate the reproducibility of our results without requiring an in-depth understanding of the code, each case study is stored in a separate repository containing all the necessary code and setup to execute the case directly. The code for the following tasks can be found in the respective repositories:  
 - [First task with fixed target and low-order model](https://github.com/SuReLI/aerobench_fixed_target_low_order)  
 - [First task with fixed target and CFD model](https://github.com/SuReLI/aerobench_fixed_target_star)  
-- [Second task with variable target and low-order model](https://github.com/SuReLI/aerobench_variable_target_low_order)  
+- [Second task with variable target and low-order model](https://github.com/SuReLI/aerobench_variable_target_low_order) **<-- You are here**  
 - [Second task with variable target and CFD model](https://github.com/SuReLI/aerobench_variable_target_star).  
   
   
-## Available algorithms  
+### Available algorithms  
 - **DDPG** : Deep Deterministic Policy Gradient presented in [Continuous control with deep reinforcement learning](https://arxiv.org/abs/1509.02971).  
 - **TD3** : Twin Delayed Deep Deterministic policy gradient [Addressing Function Approximation Error in Actor-Critic Methods](https://arxiv.org/pdf/1802.09477.pdf)  
 - **SAC** : Soft Actor-Critic presented in [Soft Actor-Critic:Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor](https://arxiv.org/pdf/1801.01290.pdf)  
@@ -28,15 +28,15 @@ pip install torch torchvision imageio gym matplotlib PyYAML numpy
 ```  
 Clone the repository:  
 ```bash  
-git clone https://github.com/SuReLI/aerobench_fixed_target_low_order
+git clone https://github.com/SuReLI/aerobench_variable_target_low_order
 ```  
   
 ## Usage  
   
 ### Training phase  
-Navigate to the directory to run the first task with the low-order model:  
+Navigate to the directory to run the desired task:
 ```bash  
-cd aerobench_fixed_target_low_order
+cd aerobench_variable_target_low_order
 ```  
 Initiate training using the following command:
 ```bash
@@ -52,9 +52,9 @@ as well as for setting the number of episodes for each evaluation:
   
 Example:  
 ```bash  
-python3 -u train SAC --appli='flatplate' --load='results/SAC/flatplate_2023-12-13_16-46-40' --loadrm='results/SAC/flatplate_2023-12-13_16-46-40'  
+python3 -u train SAC --appli='flatplate' -n 4 --load='results/SAC/flatplate_2023-12-13_16-46-40' --loadrm='results/SAC/flatplate_2023-12-13_16-46-40'  
 ```  
-This command trains the specified reinforcement learning agent (SAC in this case) on the 'flatplate' application (low-order model) with the option to load a pre-existing model (soft_actor.pth, critic_target and critic.pth) from the folder `results/SAC/flatplate_2023-12-13_16-46-40/models/` and a pre-existing memory buffer (replay_memory.yaml) from the folder `results/SAC/flatplate_2023-12-13_16-46-40/`.
+This command trains the specified reinforcement learning agent (SAC in this case) on the 'flatplate' application (low-order model) with the option to load a pre-existing model (soft_actor.pth, critic_target and critic.pth) from the folder `results/SAC/flatplate_2023-12-13_16-46-40/models/` and a pre-existing memory buffer (replay_memory.yaml) from the folder `results/SAC/flatplate_2023-12-13_16-46-40/`. Besides, evaluation is performed each time on 4 episodes.
 
 
 Alternatively, if you are on a supercomputer, you can launch the training using a slurlm file. An example slurlm file, called **submit_example**, is provided  in the repository.
@@ -64,7 +64,7 @@ Alternatively, if you are on a supercomputer, you can launch the training using 
 ### Testing phase
 Navigate to the directory root:
 ```bash 
-cd aerobench_fixed_target_low_order
+cd aerobench_variable_target_low_order
 ``` 
 Initiate testing using the following command:
 ```bash
